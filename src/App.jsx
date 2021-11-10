@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from './store/auth-context';
 
-function App() {
+const App = () => {
+  const ctx = useContext(AuthContext);
   return (
     <div className="App">
-      Hello
+      {ctx.isLoggedIn ? (
+        <div>
+          {ctx.currentUser}
+          {' '}
+        </div>
+      ) : <button type="button" onClick={ctx.logIn}>Connect Metamask</button>}
     </div>
   );
-}
+};
 
 export default App;
