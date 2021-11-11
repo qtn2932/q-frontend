@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AuthContextProvider } from './store/auth-context';
+import { MoralisProvider } from 'react-moralis';
+
 import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
+    <MoralisProvider
+      appId={process.env.REACT_APP_APPLICATION_ID}
+      serverUrl={process.env.REACT_APP_SERVER_URL}
+    >
       <App />
-    </AuthContextProvider>
+    </MoralisProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

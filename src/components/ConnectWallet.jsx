@@ -1,13 +1,34 @@
 import React from 'react';
+import { useMoralis } from 'react-moralis';
 
-const ConnectWallet = (props) => {
-  const [currentUser] = props;
+const ConnectWallet = () => {
+  const {
+    authenticate, isAuthenticated, user, logout, isAuthenticating,
+  } = useMoralis();
+  const connectMetamask = () => {
+    authenticate({ signingMessage: 'Allow contract interaction', chainId: 137 });
+  };
+  if (!isAuthenticated) {
+    return (
+      <div>
+        <button
+          type="button"
+          onClick={connectMetamask}
+        >
+          Authenticate
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <button type="submit">
-        Connect metamask
-        {currentUser}
-      </button>
+      <h1>
+        Welcome
+        {' '}
+        {user.get('ethAddress')}
+      </h1>
+      <button type="button" onClick={() => logout()} disabled={isAuthenticating}>Log Out</button>
     </div>
   );
 };
