@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MoralisProvider } from 'react-moralis';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { MoralisDappProvider } from './providers/MoralisDappProvider/MoralisDappProvider';
-
 import App from './App';
 
 const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID;
@@ -14,7 +14,9 @@ const Application = () => {
     return (
       <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
         <MoralisDappProvider>
-          <App isServerInfo />
+          <Router>
+            <App isServerInfo />
+          </Router>
         </MoralisDappProvider>
       </MoralisProvider>
     );
